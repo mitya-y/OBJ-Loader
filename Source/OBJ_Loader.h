@@ -18,7 +18,7 @@
 #include <math.h>
 
 // Print progress to console while loading (large models)
-#define OBJL_CONSOLE_OUTPUT
+// #define OBJL_CONSOLE_OUTPUT
 
 // Namespace: OBJL
 //
@@ -636,6 +636,9 @@ namespace objl
 					outputIndicator = 0;
 					#endif
 				}
+				if (curline.size() > 0 && curline.back() == '\r') {
+					curline.resize(curline.size() - 1);
+				}
 				// Load Materials
 				if (algorithm::firstToken(curline) == "mtllib")
 				{
@@ -772,6 +775,10 @@ namespace objl
 						// Position & Normal
 						vtype = 3;
 					}
+				}
+
+				if (svert[0] == "\r") {
+					continue;
 				}
 
 				// Calculate and store the vertex
